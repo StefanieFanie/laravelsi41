@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,6 +68,37 @@ class MahasiswaController extends Controller
     public function selectQb(){
         $kampus="Universitas Multi Data Palembang";
         $result=DB::table('mahasiswas')->get();
+        // dump($result);
+        return view('mahasiswa.index',['allmahasiswa' => $result, 'kampus' => $kampus]);
+    }
+
+    public function insertElq(){
+        $mahasiswa = new Mahasiswa();
+        $mahasiswa->npm = '2226240101';
+        $mahasiswa->nama_mahasiswa = "Dewi";
+        $mahasiswa->tempat_lahir = "Palembang";
+        $mahasiswa->tanggal_lahir = '2002-12-20';
+        $mahasiswa->alamat = "Rajawali";
+        $mahasiswa->save();
+        dump($mahasiswa);
+    }
+
+    public function updateElq(){
+        $mahasiswa = Mahasiswa::where('npm','2226240101')->first();
+        $mahasiswa->nama_mahasiswa = "Hendra Hendarto";
+        $mahasiswa->save();
+        dump($mahasiswa);
+    }
+
+    public function deleteElq(){
+        $mahasiswa = Mahasiswa::where('npm','2226240101')->first();
+        $mahasiswa->delete();
+        dump($mahasiswa);
+    }
+
+    public function selectElq(){
+        $kampus="Universitas Multi Data Palembang";
+        $result=Mahasiswa::all();
         // dump($result);
         return view('mahasiswa.index',['allmahasiswa' => $result, 'kampus' => $kampus]);
     }

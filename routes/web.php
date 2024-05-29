@@ -27,3 +27,10 @@ Route::get('/mahasiswa/insert-qb', [MahasiswaController::class,'insertQb']);
 Route::get('/mahasiswa/update-qb', [MahasiswaController::class,'updateQb']);
 Route::get('/mahasiswa/delete-qb', [MahasiswaController::class,'deleteQb']);
 Route::get('/mahasiswa/select-qb', [MahasiswaController::class,'selectQb']);
+
+Route::get('/mahasiswa/insert-elq', [MahasiswaController::class,'insertElq']);
+Route::get('/mahasiswa/update-elq', [MahasiswaController::class,'updateElq']);
+Route::get('/mahasiswa/delete-elq', [MahasiswaController::class,'deleteElq']);
+Route::get('/mahasiswa/select-elq', [MahasiswaController::class,'selectElq']);
+
+Route::get('/prodi/all-join-facade', [ProdiController::class, 'allJoinFacade']);
