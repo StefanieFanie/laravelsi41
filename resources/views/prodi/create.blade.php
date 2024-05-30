@@ -11,13 +11,23 @@
     <div class="container">
         <div class="row pt-4">
             <div class="col">
-                <h2>Form Prodi</h2>
+                <h2>Form Studi</h2>
+                @if (@session()->has('info'))
+                    <div class = "alert alert-success">
+                        {{ session()->get('info') }}
+                    </div>
+                @endif
+
                 <form action="{{url('prodi/store')}}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" name="nama" id="nama" class="form-control">
+                        <input type="text" name="nama" id="nama"
+                        class="form-control" value="{{ old('nama') }}">
                     </div>
+                    @error('nama')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     <button type="submit" class="btn btn-primary mt-2">Simpan</button>
                 </form>
             </div>

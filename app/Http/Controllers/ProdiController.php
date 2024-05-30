@@ -10,11 +10,15 @@ class ProdiController extends Controller
 {
     //
     public function index(){
-        $kampus = "Universitas Multi Data Palembang";
-        $fakultas = ["Fakultas Ilkom","Fakultas Ilmu Ekonomi"];
+        // $kampus = "Universitas Multi Data Palembang";
+        // $fakultas = ["Fakultas Ilkom","Fakultas Ilmu Ekonomi"];
 
-        // return compact('fakultas','kampus');
-        return view ('fakultas.index',compact('fakultas','kampus'));
+        // // return compact('fakultas','kampus');
+        // return view ('fakultas.index',compact('fakultas','kampus'));
+
+        // prodi adalah model jadi harus use App\Models\Prodi;
+        $prodi = Prodi::all();
+        return view('prodi.index')->with('prodis',$prodis);
     }
 
     public function allJoinFacade(){
@@ -43,5 +47,20 @@ class ProdiController extends Controller
 
     public function create(){
         return view('prodi.create'); // Nama folder prodi dan nama file create
+    }
+
+    public function store(Request $request){
+        // dump($request);
+        $validateData = $request->validate([
+            'nama' => 'required|min:5|max:20'
+        ]);
+        // dump($validateData);
+        // echo $validateData['nama'];
+        $prodi = new Prodi();
+        $prodi->nama = $validateData['nama'];
+        $prodi->save();
+
+        $request->session()->flash('info','Data berhasil disimpan');
+        return redirect('prodi/create');
     }
 }
