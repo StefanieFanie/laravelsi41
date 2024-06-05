@@ -28,9 +28,18 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Nama</th><th>Aksi</th>
+                    <th>Nama</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach ($prodis as $item)
+                    <tr>
+                        <td>{{ $item->nama }}</td>
+                        <td><a href="{{ url('/prodi/'.$item->id) }}" class="btn btn-warning">Detail</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 </div>
