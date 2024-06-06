@@ -76,4 +76,21 @@ class ProdiController extends Controller
         'kampus' => "Universitas Multi Data Palembang"
         ]);
     }
+
+    public function update(Request $request, Prodi $prodi){
+        // Menggunakan eloquent
+        $validateData = $request->validate([
+            'nama' => 'required|min:5|max:20'
+        ]);
+
+        Prodi::where('id',$prodi->id)->update($validateData);
+
+        $request->session()->flash('info','Data berhasil disimpan');
+        return redirect('prodi');
+    }
+
+    public function destroy(Prodi $prodi){
+        $prodi->delete();
+        return redirect('prodi')->with('info',"Prodi berhasil dihapus");
+    }
 }
